@@ -1,0 +1,45 @@
+.boarder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid;
+
+    .cell {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid;
+        box-sizing: border-box;
+    }
+
+    .cell img {
+        max-width: 60%;
+    }
+
+    .cell.selected {
+        background-color: rgba($color: #bb9f9f, $alpha: 1.0);
+    }
+
+    .cell.availible {
+        background-color: rgba($color: #bb9f9f, $alpha: 0.5);
+    }
+
+    .white {
+        background-color: antiquewhite;
+    }
+
+    .black {
+        background-color: cadetblue;
+    }
+
+    .cord {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 10px;
+    }
+  
+}
