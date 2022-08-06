@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+// components
+import CellItem from '../cell';
 // styles
 import './style.scss';
 
@@ -6,7 +8,16 @@ const BoardComponent = ({ size, board, setBoard }) => {
     const [selectCell, setSelectCell] = useState(null);
 
     const actionsSelect = (item) => {
-        setSelectCell(item);
+        if (selectCell && selectCell !== item && selectCell.figure?.canMove(item)) {
+            selectCell.moveFigure(item);
+            setSelectCell(null);
+        } else {
+            setSelectCell(item);
+        }
+      
+        if (item.figure?.id === selectCell?.figure?.id) {
+            setSelectCell(null);
+        }
     }
 
     return (
@@ -28,12 +39,3 @@ const BoardComponent = ({ size, board, setBoard }) => {
 
 export default BoardComponent
 
-const CellItem = ({ cell, selected, actionsSelect }) => {
-    return (
-        <div className={`cell ${cell.color.toLowerCase()} ${selected ? 'selected' : ''} ${cell.available ? 'availible' : ''}`} onClick={() => actionsSelect(cell)}>
-            <span className='cord'>{cell.x}/{cell.y}</span>
-            {cell.warning && 'x'}
-            {cell.figure && <img src={cell.figure?.logo} alt="logo" />}    
-        </div>
-    )
-}

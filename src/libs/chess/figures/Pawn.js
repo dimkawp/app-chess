@@ -13,7 +13,14 @@ export class Pawn extends Figure {
         this.name = figureNames.pawn;
     }
 
-    canMove(target) {    
+    canMove(target) {
+        if  (!super.canMove(target))
+        return false;
+           
         return true;
+    }
+
+    moveFigure(target) {
+        super.moveFigure(target);
     }
 }

@@ -14,6 +14,13 @@ export class Rook extends Figure {
     }
     
     canMove(target) {
+        if  (!super.canMove(target))
+        return false;
+           
         return true;
+    }
+
+    moveFigure(target) {
+        super.moveFigure(target);
     }
 }

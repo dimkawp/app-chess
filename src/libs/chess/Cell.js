@@ -12,4 +12,17 @@ export class Cell {
         this.available = false;
         this.warning = false;  
     }
+
+    setFigure(figure) {
+        this.figure = figure;
+        this.figure.cell = this;
+    }
+
+    moveFigure(target) {
+        if (this.figure && this.figure?.canMove(target)) {
+            this.figure.moveFigure(target);
+            target.setFigure(this.figure);
+            this.figure = null;
+        }
+    }
 }

@@ -12,6 +12,13 @@ export class Figure {
     }
 
     canMove(target) {
+        if (target?.figure?.color === this.color) {
+            return false;
+        }
+        return true;
+    }
+
+    moveFigure(target) {
         return true;
     }
 }
