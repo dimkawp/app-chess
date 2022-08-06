@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // components
 import CellItem from '../cell';
 // styles
@@ -6,6 +6,15 @@ import './style.scss';
 
 const BoardComponent = ({ size, board, setBoard }) => {
     const [selectCell, setSelectCell] = useState(null);
+    const [forceUpdate, setForceUpdate] = useState(null);
+
+    useEffect(() => {
+        if (board) {
+            board.actionCell(selectCell);
+            setForceUpdate(Math.random());
+        }
+
+      }, [selectCell, board])
 
     const actionsSelect = (item) => {
         if (selectCell && selectCell !== item && selectCell.figure?.canMove(item)) {

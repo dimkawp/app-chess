@@ -25,4 +25,19 @@ export class Cell {
             this.figure = null;
         }
     }
+
+    isEmpty() {
+        if (this.figure === null) {
+            return true;
+        }
+        return false;
+    }
+
+    isEnemy(target) {
+        if (target.figure) {
+            return this.figure?.color !== target?.figure?.color
+        }
+
+        return false;
+    }
 }

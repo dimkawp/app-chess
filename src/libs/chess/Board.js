@@ -56,5 +56,17 @@ export class Board {
         this.addKings();
         this.addRooks();
     }
+
+    actionCell(selectCell) {
+        
+        for (let i = 0; i < this.cells.length; i++) {
+            const row = this.cells[i];
+
+            for (let j = 0; j < this.cells.length; j++) {
+                const target = row[j];
+                target.available = !!selectCell?.figure?.canMove(target);
+            }
+        }
+    }
 }
 

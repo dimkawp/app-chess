@@ -18,8 +18,6 @@ const App = () => {
         setBoard(newBoard)
     }, [])
 
-    console.log(board)
-
     return (
         <AppContainer>
             {board && <BoardComponent size={N} board={board} setBoard={setBoard} />}
