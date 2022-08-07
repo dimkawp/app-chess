@@ -15,6 +15,7 @@ export class Figure {
         if (target?.figure?.color === this.color) {
             return false;
         }
+
         return true;
     }
 

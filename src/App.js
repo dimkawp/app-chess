@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Input } from 'antd';
+import { Modal, Input } from 'antd';
 // components
 import AppContainer from './components/containers/app';
 import BoardComponent from './components/elements/board';
+import PlayersContainer from './components/containers/players';
 // libs
 import Board, { NewPlayer } from './libs/chess/Board';
 // styles
 import 'antd/dist/antd.css';
 import './assets/main.scss';
+
 
 const App = () => {
     const N = 8;
@@ -36,7 +38,8 @@ const App = () => {
     }
 
     return (    
-        <AppContainer> 
+        <AppContainer>
+            {firstPlayer && secondPlayer && <PlayersContainer firstPlayer={firstPlayer} secondPlayer={secondPlayer} currentPlayer={currentPlayer} />}
             {true && <ModalWindow setFirstPlayer={setFirstPlayer} setSecondPlayer={setSecondPlayer} />}
             {board && <BoardComponent 
                         size={N} 
@@ -79,7 +82,6 @@ const ModalWindow = ({ setFirstPlayer, setSecondPlayer }) => {
         }
     }
   
-
     return (
         <Modal title="Game Setting" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
             <Input onChange={(e) => setName(e, 'player1')} addonBefore={'Player 1'}/>

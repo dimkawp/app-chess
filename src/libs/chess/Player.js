@@ -6,5 +6,11 @@ export class Player {
         this.id = Math.random();
         this.name = name;
         this.color = color;
+        this.logList = [];
+    }
+
+    setLog(target) {
+        this.logList.push(target);
+        return;
     }
 }

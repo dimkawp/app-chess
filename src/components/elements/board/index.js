@@ -19,6 +19,7 @@ const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }
     const actionsSelect = (item) => {
         if (selectCell && selectCell !== item && selectCell.figure?.canMove(item)) {
             selectCell.moveFigure(item);
+            currentPlayer.setLog({ name: item.figure.name, from: selectCell, to: item })
             setSelectCell(null);
             changeOfCourse();
         } else {
@@ -26,15 +27,15 @@ const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }
                 setSelectCell(item);
             }
         }
-      
+
+        
         if (item.figure?.id === selectCell?.figure?.id) {
             setSelectCell(null);
         }
     }
 
-
     return (
-        <div className='boarder' style={{ width: `${size * 200}px`}}>
+        <div className='boarder' style={{ width: `${size * 10}vw`}}>
         {board.cells.map((row, index) => {
             return <React.Fragment key={index}>
             {row.map((cell) => {
