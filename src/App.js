@@ -8,7 +8,7 @@ import { Board } from './libs/chess/Board';
 import './assets/main.scss';
 
 const App = () => {
-    const N = 5;
+    const N = 8;
     const [board, setBoard] = useState(null);
 
     useEffect(() => {

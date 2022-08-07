@@ -16,8 +16,14 @@ export class King extends Figure {
     canMove(target) {
         if  (!super.canMove(target))
         return false;
-           
-        return true;
+        
+        if  (this.cell.isEmptyByHorizontal(target, false))
+            return true
+        if  (this.cell.isEmptyByVertical(target, false))
+            return true
+        if  (this.cell.isEmptyByDiagonal(target, false))
+            return true
+        return false
     }
 
     moveFigure(target) {

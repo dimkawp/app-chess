@@ -29,6 +29,7 @@ export class Pawn extends Figure {
 
             const min = Math.min(this.cell.y, target.y);
             const max = Math.max(this.cell.y, target.y);
+            
             for (let y = min + 1; y < max; y++) {
                 if  (!this.cell.board.getCell(this.cell.x, y).isEmpty()) {
                     return false
