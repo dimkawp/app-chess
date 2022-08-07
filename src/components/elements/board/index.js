@@ -4,7 +4,7 @@ import CellItem from '../cell';
 // styles
 import './style.scss';
 
-const BoardComponent = ({ size, board, setBoard }) => {
+const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }) => {
     const [selectCell, setSelectCell] = useState(null);
     const [forceUpdate, setForceUpdate] = useState(null);
 
@@ -20,14 +20,18 @@ const BoardComponent = ({ size, board, setBoard }) => {
         if (selectCell && selectCell !== item && selectCell.figure?.canMove(item)) {
             selectCell.moveFigure(item);
             setSelectCell(null);
+            changeOfCourse();
         } else {
-            setSelectCell(item);
+            if (item.figure?.color === currentPlayer.color) {
+                setSelectCell(item);
+            }
         }
       
         if (item.figure?.id === selectCell?.figure?.id) {
             setSelectCell(null);
         }
     }
+
 
     return (
         <div className='boarder' style={{ width: `${size * 200}px`}}>

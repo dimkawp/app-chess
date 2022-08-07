@@ -3,10 +3,11 @@ import { King } from './figures/King';
 import { Pawn } from './figures/Pawn';
 import { Rook } from './figures/Rook';
 import { CONSTS } from './consts';
+import { Player } from './Player';
 
 const { colors } = CONSTS;
 
-export class Board {
+class Board {
     constructor(n) {
         this.cells = [];
         this.n = n;
@@ -70,3 +71,6 @@ export class Board {
     }
 }
 
+export default Board;
+
+export class NewPlayer extends Player {};
