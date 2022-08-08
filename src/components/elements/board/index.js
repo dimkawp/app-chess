@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Modal } from 'antd';
 // components
 import CellItem from '../cell';
 // styles
@@ -14,11 +15,22 @@ const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }
             setForceUpdate(Math.random());
         }
 
-      }, [selectCell, board])
+    }, [selectCell, board]);
+
+    useEffect(() => {
+        if (board.winner) {
+            Modal.success({
+                content: <WinnerContent winner={board.winner} />,
+                onOk() {
+                    window.location.reload();    
+                }
+            });
+        }
+    }, [board.winner, currentPlayer])
 
     const actionsSelect = (item) => {
         if (selectCell && selectCell !== item && selectCell.figure?.canMove(item)) {
-            selectCell.moveFigure(item);
+            selectCell.moveFigure(item, currentPlayer);
             currentPlayer.setLog({ name: item.figure.name, from: selectCell, to: item })
             setSelectCell(null);
             changeOfCourse();
@@ -27,7 +39,6 @@ const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }
                 setSelectCell(item);
             }
         }
-
         
         if (item.figure?.id === selectCell?.figure?.id) {
             setSelectCell(null);
@@ -53,3 +64,11 @@ const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }
 
 export default BoardComponent
 
+const WinnerContent = ({ winner }) => {
+    return (
+        <div className='winner-content'>
+            <img src={winner.logo} alt="logotype" />
+            {`${winner.name} get been win`}
+        </div>
+    )
+}

@@ -11,6 +11,7 @@ class Board {
     constructor(n) {
         this.cells = [];
         this.n = n;
+        this.winner = null;
     }
 
     initCells() {
@@ -25,6 +26,10 @@ class Board {
             }
             this.cells.push(row);
         } 
+    }
+
+    setWinner(player) {
+        this.winner = player;
     }
 
     getCell(x, y) {

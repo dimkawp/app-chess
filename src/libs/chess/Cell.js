@@ -18,8 +18,9 @@ export class Cell {
         this.figure.cell = this;
     }
 
-    moveFigure(target) {
+    moveFigure(target, player) {
         if (this.figure && this.figure?.canMove(target)) {
+            target?.figure?.name === 'King' && this.board.setWinner(player);
             this.figure.moveFigure(target);
             target.setFigure(this.figure);
             this.figure = null;

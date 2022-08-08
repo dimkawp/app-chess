@@ -3,14 +3,14 @@ import { Button, Descriptions, List, Drawer  } from 'antd';
 // styles
 import './style.scss';
 
-const PlayersContainer = ({ firstPlayer, secondPlayer, currentPlayer }) => {
+const PlayersContainer = ({ size, firstPlayer, secondPlayer, currentPlayer }) => {
     return (
-        <Descriptions title={`Game Info current - ${currentPlayer?.name}`} className='players-container'>
-            <Descriptions.Item label="First Player">
-                <ModalWindow data={firstPlayer} placement={'left'}>First Player info</ModalWindow>
+        <Descriptions title={`Game Info, walking now - ${currentPlayer?.name}`} style={{ width: `${size * 10}vw`}}>
+            <Descriptions.Item label={`${firstPlayer.name}`}>
+                <ModalWindow data={firstPlayer} placement={'left'}>Walking history</ModalWindow>
             </Descriptions.Item>
-            <Descriptions.Item label="Second Player">
-                <ModalWindow data={secondPlayer} placement={'right'}>Second Player info</ModalWindow>
+            <Descriptions.Item label={`${secondPlayer.name}`}>
+                <ModalWindow data={secondPlayer} placement={'right'}>Walking history</ModalWindow>
             </Descriptions.Item>
         </Descriptions>
     )

@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Input } from 'antd';
 // components
 import AppContainer from './components/containers/app';
 import BoardComponent from './components/elements/board';
 import PlayersContainer from './components/containers/players';
+import ModalSettings from './components/elements/modals/setting';
 // libs
 import Board, { NewPlayer } from './libs/chess/Board';
 // styles
 import 'antd/dist/antd.css';
 import './assets/main.scss';
 
-
 const App = () => {
-    const N = 8;
     const [board, setBoard] = useState(null);
     const [firstPlayer, setFirstPlayer] = useState(null);
     const [secondPlayer, setSecondPlayer] = useState(null);
     const [currentPlayer, setCurrentPlayer] = useState(null);
+    const [size, setSize] = useState(5);
 
     useEffect(() => {
-        const newBoard = new Board(N);
+        const newBoard = new Board(size);
         newBoard.initCells();
         newBoard.addAllFigures();
         setBoard(newBoard);
-    }, []);
+    }, [size]);
 
     useEffect(() => {
         setCurrentPlayer(firstPlayer)
@@ -31,18 +30,17 @@ const App = () => {
 
     const changeOfCourse = () => {
         if (currentPlayer.color === firstPlayer.color) {
-            return setCurrentPlayer(secondPlayer)
+            return setCurrentPlayer(secondPlayer);
         }
-
         return setCurrentPlayer(firstPlayer)
     }
 
     return (    
         <AppContainer>
-            {firstPlayer && secondPlayer && <PlayersContainer firstPlayer={firstPlayer} secondPlayer={secondPlayer} currentPlayer={currentPlayer} />}
-            {true && <ModalWindow setFirstPlayer={setFirstPlayer} setSecondPlayer={setSecondPlayer} />}
+            {<ModalSettings NewPlayer={NewPlayer} setFirstPlayer={setFirstPlayer} setSecondPlayer={setSecondPlayer} size={size} setSize={setSize} />}
+            {firstPlayer && secondPlayer && <PlayersContainer size={size} firstPlayer={firstPlayer} secondPlayer={secondPlayer} currentPlayer={currentPlayer} />}
             {board && <BoardComponent 
-                        size={N} 
+                        size={size} 
                         board={board} 
                         setBoard={setBoard} 
                         currentPlayer={currentPlayer}
@@ -53,39 +51,3 @@ const App = () => {
 
 export default App;
 
-const ModalWindow = ({ setFirstPlayer, setSecondPlayer }) => {
-    const [isModalVisible, setIsModalVisible] = useState(true);
-    const [firstPlayerName, setFirstPlayerName] = useState('');
-    const [secondPlayerName, setSecondPlayerName] = useState('');
-    
-    const handleOk = () => {
-        setFirstPlayer(new NewPlayer('WHITE', firstPlayerName))
-        setSecondPlayer(new NewPlayer('BLACK', secondPlayerName))
-
-        setIsModalVisible(false);
-    };
-  
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const setName = (e, init) => {
-        switch (init) {
-            case 'player1':
-                setFirstPlayerName(e.target.value)
-                break;
-            case 'player2':
-                setSecondPlayerName(e.target.value)
-                break;
-            default:
-                break;
-        }
-    }
-  
-    return (
-        <Modal title="Game Setting" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <Input onChange={(e) => setName(e, 'player1')} addonBefore={'Player 1'}/>
-            <Input onChange={(e) => setName(e, 'player2')} addonBefore={'Player 2'}/>
-        </Modal>
-    );
-}
