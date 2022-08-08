@@ -26,7 +26,7 @@ const BoardComponent = ({ size, board, setBoard, currentPlayer, changeOfCourse }
                 }
             });
         }
-    }, [board.winner, currentPlayer])
+    }, [board.winner])
 
     const actionsSelect = (item) => {
         if (selectCell && selectCell !== item && selectCell.figure?.canMove(item)) {

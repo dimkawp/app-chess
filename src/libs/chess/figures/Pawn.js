@@ -19,11 +19,11 @@ export class Pawn extends Figure {
             return false;
         }
 
-        const move = this.cell.figure?.color === colors.black ? 1 : -1
-        const firstMove = this.cell.figure?.color === colors.black ? 2 : -2
-        const step = target.y === this.cell.y + move || this.isFirstStep && (target.y === this.cell.y + firstMove)
+        const move = this.cell.figure?.color === colors.black ? 1 : -1;
+        const firstMove = this.cell.figure?.color === colors.black ? 2 : -2;
+        const canStep = target.y === this.cell.y + move || this.isFirstStep && (target.y === this.cell.y + firstMove);
    
-        if  (step
+        if  (canStep
             && target.x === this.cell.x
             && this.cell.board.getCell(target.x, target.y).isEmpty()) {
 
@@ -32,7 +32,7 @@ export class Pawn extends Figure {
             
             for (let y = min + 1; y < max; y++) {
                 if  (!this.cell.board.getCell(this.cell.x, y).isEmpty()) {
-                    return false
+                    return false;
                 }
             }
             return true;

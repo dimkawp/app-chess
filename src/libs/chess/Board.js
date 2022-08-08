@@ -19,9 +19,9 @@ class Board {
             const row = [];
             for (let j = 0; j < this.n; j++) {
                 if ((i + j) % 2 !== 0) {
-                    row.push( new Cell(this, j, i, colors.black, null))
+                    row.push( new Cell(this, j, i, colors.black, null));
                 } else {
-                    row.push(new Cell(this, j, i, colors.white, null))
+                    row.push(new Cell(this, j, i, colors.white, null));
                 }
             }
             this.cells.push(row);
@@ -33,28 +33,28 @@ class Board {
     }
 
     getCell(x, y) {
-        return this.cells[y][x]
+        return this.cells[y][x];
     }
 
     addPawns() {
         for (let i = 0; i < this.n; i++) {
-            new Pawn(colors.black, this.getCell(i, this.n - (this.n - 1)))
-            new Pawn(colors.white, this.getCell(i, this.n - 2))
+            new Pawn(colors.black, this.getCell(i, this.n - (this.n - 1)));
+            new Pawn(colors.white, this.getCell(i, this.n - 2));
         }
     }
 
     addKings() {
         let centerPosition = Math.floor(this.n / 2);
-        new King(colors.black, this.getCell(centerPosition, 0))
-        new King(colors.white, this.getCell(centerPosition, this.n - 1))
+        new King(colors.black, this.getCell(centerPosition, 0));
+        new King(colors.white, this.getCell(centerPosition, this.n - 1));
     }
 
     addRooks() {
-        new Rook(colors.black, this.getCell(0, 0))
-        new Rook(colors.black, this.getCell((this.n - 1), 0))
+        new Rook(colors.black, this.getCell(0, 0));
+        new Rook(colors.black, this.getCell((this.n - 1), 0));
 
-        new Rook(colors.white, this.getCell(0, (this.n - 1)))
-        new Rook(colors.white, this.getCell((this.n - 1), (this.n - 1)))  
+        new Rook(colors.white, this.getCell(0, (this.n - 1)));
+        new Rook(colors.white, this.getCell((this.n - 1), (this.n - 1)));
     }
 
     addAllFigures() {

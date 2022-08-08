@@ -8,5 +8,11 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## APP CHESS SETTING
+- Set players name and boarder size;
+- players have log info with all moves;
+
+## FIGURES
+- King (main figure, if he die you lost game);
+- Pawns and Rooks;
+

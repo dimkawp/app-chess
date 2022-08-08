@@ -10,7 +10,6 @@ const CellItem = ({ cell, selected, actionsSelect }) => {
     return (
         <div className={classes} onClick={() => actionsSelect(cell)}>
             <span className='cord'>{cell.x}/{cell.y}</span>
-            {cell.warning && 'x'}
             {cell.figure && <img src={cell.figure?.logo} alt={cell.figure.name} />}    
         </div>
     )

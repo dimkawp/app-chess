@@ -1,6 +1,3 @@
-import { CONSTS } from './consts';
-const { colors, figureNames } = CONSTS;
-
 export class Figure {
     constructor(color, cell) {
         this.id = Math.random();

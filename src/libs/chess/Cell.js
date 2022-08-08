@@ -1,6 +1,3 @@
-import { CONSTS } from './consts';
-const { colors, figureNames } = CONSTS;
-
 export class Cell {
     constructor(board, x, y, color, figure) {
         this.id = Math.random();
@@ -10,7 +7,6 @@ export class Cell {
         this.figure = figure;
         this.board = board;
         this.available = false;
-        this.warning = false;  
     }
 
     setFigure(figure) {
@@ -36,7 +32,7 @@ export class Cell {
 
     isEnemy(target) {
         if (target.figure) {
-            return this.figure?.color !== target?.figure?.color
+            return this.figure?.color !== target?.figure?.color;
         }
         return false;
     }
@@ -51,7 +47,7 @@ export class Cell {
 
         for (let y = min + 1; y < max; y++) {
             if (!this.board.getCell(this.x, fullRange ? y : this.y).isEmpty()) {
-                return false
+                return false;
             }
         }
         return true;
@@ -67,7 +63,7 @@ export class Cell {
     
         for (let x = min + 1; x < max; x++) {
             if (!this.board.getCell(fullRange ? x : this.x, this.y).isEmpty()) {
-                return false
+                return false;
             }
         }
         return true;
@@ -77,15 +73,17 @@ export class Cell {
         const absX = Math.abs(target.x - this.x);
         const absY = Math.abs(target.y - this.y);
 
-        if (absY !== absX)
+        if (absY !== absX) {
             return false;
-
+        }
+            
         const dy = fullRange ? this.y < target.y ? 1 : -1 : 0;
         const dx = fullRange ? this.x < target.x ? 1 : -1 : 0;
     
         for (let i = 1; i < absY; i++) {
-        if (!this.board.getCell(this.x + dx*i, this.y + dy   * i).isEmpty())
-            return false;
+            if (!this.board.getCell(this.x + dx*i, this.y + dy   * i).isEmpty()) {
+                return false;
+            }
         }
         return true;
       }
